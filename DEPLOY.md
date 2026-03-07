@@ -34,30 +34,12 @@ git push -u origin main
    | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | `eyJ...`             | From Supabase (anon)     |
    | `SUPABASE_SERVICE_ROLE_KEY` | `eyJ...`                | From Supabase (service_role) |
 
-3. **Build & deploy**: Vercel will run `prisma generate && next build`. Deploy.
+3. **Deploy**: Click **Deploy**. The build runs `prisma generate && prisma migrate deploy && next build` — your production database gets its tables on first deploy (as long as `DATABASE_URL` is set).
 
-## 4. Run database migrations in production
+## 4. Open your app
 
-After the first deploy, create tables in your production DB:
-
-**Option A – Vercel (one-off):**  
+**Migrations run automatically during the Vercel build.** To open the app:  
 In Vercel project → Settings → Environment Variables, ensure `DATABASE_URL` is set. Then run locally **pointing at production DB** (danger: only if you’re sure):
-
-```bash
-# Only if DATABASE_URL in .env is your PRODUCTION Supabase DB
-npx prisma migrate deploy
-```
-
-**Option B – Safer:**  
-Create a `.env.production` with only `DATABASE_URL` for the production DB, then:
-
-```bash
-dotenv -e .env.production -- npx prisma migrate deploy
-```
-
-Or run the same command from a one-off script/CI job that has access to production `DATABASE_URL`.
-
-## 5. Open your app
 
 Use the Vercel URL (e.g. `https://subconscious-survey.vercel.app`). Register and log in to see the dashboard.
 
@@ -78,6 +60,6 @@ Use the Vercel URL (e.g. `https://subconscious-survey.vercel.app`). Register and
 
 - [ ] Code on GitHub
 - [ ] Supabase project created (URL, anon key, service_role key, DB URL)
-- [ ] Vercel project created and env vars set
-- [ ] `prisma migrate deploy` run against production `DATABASE_URL`
+- [ ] Vercel project created and all 4 env vars set
+- [ ] Deploy succeeds (migrations run automatically)
 - [ ] App opens and you can register / log in
