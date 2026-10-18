@@ -95,6 +95,11 @@ canvas{display:block;width:100%;flex:1;min-height:0}
 </style>
 </head>
 <body>
+<div id="boot" style="position:fixed;top:0;left:0;right:0;bottom:0;z-index:99;display:flex;align-items:center;justify-content:center;flex-direction:column;background:#9fd6ff;color:#24456e;font:20px sans-serif;text-align:center;padding:20px">Loading Bakhtawar's Bubbles…</div>
+<script>
+window.__bootErr=function(m){var b=document.getElementById("boot");if(!b)return;b.style.display="flex";b.innerHTML="<div style='font-size:22px;margin-bottom:10px'>Something went wrong</div><div style='font-size:14px;word-break:break-word'>"+String(m).replace(/</g,"&lt;")+"</div><div style='font-size:14px;margin-top:14px'>Send a screenshot of this screen to Zahra</div>"};
+window.onerror=function(msg,src,line,col){window.__bootErr(msg+" (line "+line+":"+col+") · "+navigator.userAgent)};
+</script>
 <svg width="0" height="0" style="position:absolute">
   <defs>
     <path id="starP" d="M12 2.2l2.9 6.1 6.7.8-5 4.6 1.4 6.6L12 17l-6 3.3 1.4-6.6-5-4.6 6.7-.8z"/>
@@ -560,6 +565,7 @@ function frame(){frameT++;if(screen==="game"&&W)drawGame();else if(screen==="map
 addEventListener("resize",()=>{resize();resizeMap()});
 setSound(soundOn);setLives(lives);goMap(unlocked);frame();
 window.__game={startLevel,levelParams,get state(){return state},openDurood,setLives};
+var __b=document.getElementById("boot");if(__b)__b.style.display="none";
 </script>
 <script>if("serviceWorker" in navigator){addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}</script>
 </body>
