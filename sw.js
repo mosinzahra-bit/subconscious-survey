@@ -1,4 +1,4 @@
-const CACHE = "bubbles-v2";
+const CACHE = "bubbles-v3";
 const FILES = ["./", "index.html", "manifest.webmanifest", "voice/win.mp3", "voice/lose.mp3",
   "icons/icon-192.png", "icons/icon-512.png", "icons/maskable-512.png", "icons/apple-180.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES))); self.skipWaiting(); });
